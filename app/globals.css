@@ -57,6 +57,25 @@ body {
   color: transparent;
 }
 
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-gradient-animated {
+  background: linear-gradient(92deg, #10b981, #2dd4bf 40%, #22d3ee 60%, #10b981);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 5s ease-in-out infinite;
+}
+
 /* ---------- Hero backdrop: glow + faint grid ---------- */
 .hero-backdrop {
   background:
@@ -190,7 +209,8 @@ body {
   .animate-float-slow,
   .animate-float-slower,
   .animate-ticker,
-  .animate-fade-up {
+  .animate-fade-up,
+  .text-gradient-animated {
     animation: none;
   }
 
