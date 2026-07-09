@@ -1,26 +1,203 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f9f8;
+  --foreground: #0c1512;
+  --surface: #ffffff;
+  --muted: #55645e;
+  --line: rgba(12, 21, 18, 0.09);
+  --glow-a: rgba(16, 185, 129, 0.16);
+  --glow-b: rgba(34, 211, 238, 0.1);
+}
+
+[data-theme="dark"] {
+  --background: #060b09;
+  --foreground: #e8efec;
+  --surface: #0b1310;
+  --muted: #93a59e;
+  --line: rgba(232, 239, 236, 0.09);
+  --glow-a: rgba(16, 185, 129, 0.17);
+  --glow-b: rgba(34, 211, 238, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.35);
+}
+
+/* ---------- Gradient text ---------- */
+.text-gradient {
+  background: linear-gradient(92deg, #10b981, #2dd4bf 55%, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Hero backdrop: glow + faint grid ---------- */
+.hero-backdrop {
+  background:
+    radial-gradient(52rem 30rem at 50% -6rem, var(--glow-a), transparent 65%),
+    radial-gradient(40rem 26rem at 82% 22rem, var(--glow-b), transparent 70%);
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(42rem 30rem at 50% 0%, black 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(42rem 30rem at 50% 0%, black 30%, transparent 78%);
+}
+
+/* ---------- Rotating gradient ring (founder frames) ---------- */
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes ring-spin {
+  to {
+    --ring-angle: 360deg;
+  }
+}
+
+.founder-ring {
+  background: conic-gradient(
+    from var(--ring-angle),
+    #10b981,
+    #22d3ee 25%,
+    transparent 50%,
+    #10b981 75%,
+    #22d3ee 90%,
+    #10b981
+  );
+  animation: ring-spin 6s linear infinite;
+}
+
+/* ---------- Floating orbs ---------- */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slow 10s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero entrance ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--fade-delay, 0ms);
+}
+
+/* ---------- Tech ticker ---------- */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 28s linear infinite;
+}
+
+.ticker-mask {
+  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+}
+
+/* ---------- Card hover sheen ---------- */
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-6px);
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 18px 40px -18px rgba(16, 185, 129, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .founder-ring,
+  .animate-float-slow,
+  .animate-float-slower,
+  .animate-ticker,
+  .animate-fade-up {
+    animation: none;
+  }
+
+  .animate-fade-up,
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
