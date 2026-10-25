@@ -50,7 +50,7 @@ export default function Footer() {
           </nav>
 
           <div>
-            <p className="text-caption uppercase tracking-[0.14em] text-muted">WhatsApp</p>
+            <p className="text-caption uppercase tracking-[0.14em] text-muted">Contact</p>
             <ul className="mt-5 grid gap-3">
               {contacts.map((contact) => (
                 <li key={contact.number}>
@@ -65,8 +65,16 @@ export default function Footer() {
                     </span>
                     <span className="block text-caption tabular-nums text-muted">{contact.display}</span>
                   </a>
+                  <a href={`mailto:${contact.email}`} className="block text-caption text-muted transition-colors hover:text-gold-bright">
+                    {contact.email}
+                  </a>
                 </li>
               ))}
+              <li>
+                <a href={`mailto:${site.email}`} className="text-small text-text/80 transition-colors hover:text-gold-bright">
+                  {site.email}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

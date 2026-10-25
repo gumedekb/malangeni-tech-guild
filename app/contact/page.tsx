@@ -3,7 +3,7 @@ import ContactForm from "../components/Contact";
 import { Reveal, Spotlight } from "../components/motion";
 import { FaqList } from "../components/sections";
 import { Em, PageHero, SectionHeader, WhatsAppButton } from "../components/ui";
-import { contacts } from "../lib/site";
+import { contacts, site } from "../lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -30,6 +30,9 @@ export default function ContactPage() {
                     <div>
                       <p className="text-body font-semibold">{contact.name}</p>
                       <p className="mt-1 text-small tabular-nums text-muted">{contact.display}</p>
+                      <a href={`mailto:${contact.email}`} className="mt-0.5 block text-small text-muted transition-colors hover:text-gold-bright">
+                        {contact.email}
+                      </a>
                     </div>
                     <WhatsAppButton contact={contact} className="!px-5 !py-3">
                       WhatsApp
@@ -40,6 +43,12 @@ export default function ContactPage() {
             </Spotlight>
             <Reveal delay={200}>
               <p className="mt-5 text-caption text-muted">Two numbers, so if one of us is busy the other one answers.</p>
+              <p className="mt-3 text-small text-muted">
+                Or email{" "}
+                <a href={`mailto:${site.email}`} className="text-text/85 underline decoration-gold/50 underline-offset-4 transition-colors hover:text-gold-bright">
+                  {site.email}
+                </a>
+              </p>
               <p className="mt-10 border-t border-line pt-8 text-small text-muted">
                 Prefer a form? Fill this one in. It opens WhatsApp with your details already typed in — just press send.
               </p>

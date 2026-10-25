@@ -1,17 +1,18 @@
 // Company facts and contact details, in one place.
 
-export type Contact = { name: string; number: string; display: string };
+export type Contact = { name: string; number: string; display: string; email: string };
 
 // Two numbers so someone is always available. The first is the default for every WhatsApp button.
 export const contacts: Contact[] = [
-  { name: "Khumbulani", number: "27727524123", display: "072 752 4123" },
-  { name: "Gcina", number: "27781266606", display: "078 126 6606" },
+  { name: "Khumbulani", number: "27727524123", display: "072 752 4123", email: "khumbulani@mtgtech.co.za" },
+  { name: "Gcina", number: "27781266606", display: "078 126 6606", email: "gcina@mtgtech.co.za" },
 ];
 
 export const site = {
   name: "Malangeni Tech Guild",
   legalName: "Malangeni Tech Guild (PTY) LTD",
   url: "https://mtgtech.co.za",
+  email: "info@mtgtech.co.za",
   regNumber: "2026/533862/07",
   town: "Umzinto",
   province: "KwaZulu-Natal",

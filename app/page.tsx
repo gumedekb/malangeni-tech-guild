@@ -19,9 +19,11 @@ const jsonLd = {
   priceRange: "R350 – R8,000+",
   currenciesAccepted: "ZAR",
   telephone: `+${contacts[0].number}`,
+  email: site.email,
   contactPoint: contacts.map((c) => ({
     "@type": "ContactPoint",
     telephone: `+${c.number}`,
+    email: c.email,
     contactType: "customer service",
     name: c.name,
   })),
