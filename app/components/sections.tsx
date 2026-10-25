@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import { Browser, Phone } from "./devices";
@@ -127,7 +128,53 @@ export function OfferCard() {
 }
 
 /* ---------- Work card ---------- */
+// Real screenshots of Malangeni Hub (dark mode), from blog.mtgtech.co.za
+const hubShot = (file: string, alt: string, w: number, h: number) => (
+  <Image src={`/work/malangeni-hub/${file}`} alt={alt} width={w} height={h} className="block h-auto w-full" />
+);
+export const hubScreens = {
+  desktop: () => hubShot("desktop-home.jpg", "Malangeni Hub home page on a laptop", 1920, 960),
+  home: () => hubShot("phone-home.jpg", "Malangeni Hub home screen on a phone", 780, 1688),
+  explore: () => hubShot("phone-explore.jpg", "Explore: places around Malangeni", 780, 1688),
+  services: () => hubShot("phone-services.jpg", "Local services directory", 780, 1688),
+  homeLight: () => hubShot("phone-home-light.jpg", "Malangeni Hub in light mode", 780, 1688),
+};
+
+function HubVisual({ large }: { large: boolean }) {
+  const host = "blog.mtgtech.co.za";
+  return large ? (
+    <div className="flex h-full items-center justify-center">
+      <div className="relative w-[640px] [zoom:0.5] sm:[zoom:0.85] lg:[zoom:0.78] xl:[zoom:0.95]">
+        <Browser url={host} viewHeight={320}>
+          {hubScreens.desktop()}
+        </Browser>
+        <div className="float-a absolute -right-10 -bottom-24 [zoom:0.62]">
+          <Phone>{hubScreens.home()}</Phone>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="relative flex h-full items-end justify-center overflow-hidden" style={{ background: "radial-gradient(80% 70% at 50% 100%, #e25c4438, transparent 70%)" }}>
+      <div className="relative w-[900px] translate-y-[12%] transition-transform duration-700 ease-out [zoom:0.36] sm:[zoom:0.58] group-hover:translate-y-[8%]">
+        <Browser url={host} viewHeight={450}>
+          {hubScreens.desktop()}
+        </Browser>
+        <div className="absolute right-6 -bottom-16 [zoom:0.8]">
+          <Phone>{hubScreens.home()}</Phone>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function WorkVisual({ item, large = false }: { item: WorkItem; large?: boolean }) {
+  if (item.slug === "malangeni-hub") {
+    return (
+      <ViewTransition name={`work-${item.slug}`} share="morph">
+        <HubVisual large={large} />
+      </ViewTransition>
+    );
+  }
   return (
     <ViewTransition name={`work-${item.slug}`} share="morph">
       {large ? (
@@ -182,6 +229,12 @@ export function WorkCard({ item, delay = 0 }: { item: WorkItem; delay?: number }
         <div className="p-7 sm:p-8">
           <div className="flex flex-wrap items-center gap-2">
             <Badge>{item.label}</Badge>
+            {item.url ? (
+              <Badge tone="muted">
+                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-gold" />
+                Live
+              </Badge>
+            ) : null}
             {item.example ? <Badge tone="muted">Example layout</Badge> : null}
           </div>
           <h3 className="mt-5 text-h3 font-semibold">{item.title}</h3>

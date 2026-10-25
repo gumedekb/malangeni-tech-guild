@@ -1,7 +1,8 @@
-// Case studies shown on /work. Both entries below are EXAMPLES that demonstrate the two layouts:
+// Case studies shown on /work.
 // "product" = something we built and run ourselves (lives on its own subdomain),
 // "client"  = something we built for a customer.
-// Replace them with real projects before launch, and set `example: false`.
+// Malangeni Hub is real and live. Isitolo and Lwazi's Kitchen are EXAMPLES of the two layouts —
+// replace them with real projects and set `example: false`.
 
 export type WorkItem = {
   slug: string;
@@ -12,9 +13,21 @@ export type WorkItem = {
   summary: string;
   tags: string[];
   accent: string;
+  url?: string; // live site, for real projects
 };
 
 export const work: WorkItem[] = [
+  {
+    slug: "malangeni-hub",
+    kind: "product",
+    example: false,
+    title: "Malangeni Hub",
+    label: "Our product",
+    summary: "A community platform for Malangeni: local news, events, places and services in one place, on any phone.",
+    tags: ["Web platform", "Community", "Local directory"],
+    accent: "#e25c44",
+    url: "https://blog.mtgtech.co.za",
+  },
   {
     slug: "isitolo",
     kind: "product",

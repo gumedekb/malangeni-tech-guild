@@ -21,6 +21,11 @@ const otherServices = [
   { title: "Care & maintenance", plain: "Online, safe, backed up and up to date.", price: "from R150/mo" },
 ];
 
+// One product and one client project on the home page; /work shows everything
+const featuredWork = [work.find((w) => w.kind === "product"), work.find((w) => w.kind === "client")].filter(
+  (w) => w !== undefined,
+);
+
 export default function Home() {
   return (
     <>
@@ -146,7 +151,7 @@ export default function Home() {
             </Reveal>
           </div>
           <Spotlight className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {work.map((item, i) => (
+            {featuredWork.map((item, i) => (
               <WorkCard key={item.slug} item={item} delay={i * 120} />
             ))}
           </Spotlight>

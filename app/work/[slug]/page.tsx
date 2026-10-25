@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ClientCase from "../../components/case/ClientCase";
+import HubCase from "../../components/case/HubCase";
 import ProductCase from "../../components/case/ProductCase";
 import { getWork, work } from "../../lib/work";
 
@@ -28,5 +29,6 @@ export default async function WorkItemPage({ params }: { params: Promise<{ slug:
   const item = getWork(slug);
   if (!item) notFound();
 
+  if (item.slug === "malangeni-hub") return <HubCase item={item} />;
   return item.kind === "product" ? <ProductCase item={item} /> : <ClientCase item={item} />;
 }
