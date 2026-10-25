@@ -329,6 +329,28 @@ body::after {
   }
 }
 
+/* Mobile floating menu button and its card: ink glass with a champagne ring */
+.fab {
+  background: radial-gradient(circle at 50% 30%, rgba(200, 169, 106, 0.18), rgba(20, 20, 22, 0.92) 70%);
+  box-shadow:
+    0 0 0 1px rgba(200, 169, 106, 0.5),
+    0 0 24px -4px rgba(200, 169, 106, 0.45),
+    0 12px 30px -8px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(16px);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.fab:active {
+  transform: scale(0.94);
+}
+
+.fab-menu {
+  box-shadow:
+    0 0 0 1px rgba(200, 169, 106, 0.12),
+    0 24px 60px -16px rgba(0, 0, 0, 0.8),
+    0 0 40px -20px rgba(200, 169, 106, 0.4);
+}
+
 /* Logo monogram: gold letters with a soft glow that slowly breathes */
 .monogram {
   box-shadow:
@@ -513,16 +535,19 @@ details[open] .faq-icon {
 }
 
 /* ---------- Page transitions ---------- */
-::view-transition-group(site-header) {
+::view-transition-group(site-header),
+::view-transition-group(site-menu) {
   animation: none;
   z-index: 100;
 }
 
-::view-transition-old(site-header) {
+::view-transition-old(site-header),
+::view-transition-old(site-menu) {
   display: none;
 }
 
-::view-transition-new(site-header) {
+::view-transition-new(site-header),
+::view-transition-new(site-menu) {
   animation: none;
 }
 

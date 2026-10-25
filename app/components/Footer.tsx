@@ -11,7 +11,7 @@ const more = [
 
 export default function Footer() {
   return (
-    <footer className="relative mt-auto overflow-hidden border-t border-line pt-20 pb-10">
+    <footer className="relative mt-auto overflow-hidden border-t border-line pt-20 pb-28 md:pb-10">
       <div className="shell">
         <div className="grid gap-14 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
           <div>
