@@ -6,39 +6,7 @@ import { Reveal, Spotlight } from "./components/motion";
 import { CapabilityMarquee, OfferCard, Process, TrustStrip, WorkCard } from "./components/sections";
 import { ArrowLink, CtaBand, Em, GhostButton, RiseText, SectionHeader, WhatsAppButton } from "./components/ui";
 import { founders } from "./lib/founders";
-import { contacts, site } from "./lib/site";
 import { work } from "./lib/work";
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: site.legalName,
-  alternateName: site.name,
-  url: site.url,
-  description: "Websites, online stores and apps for small South African businesses.",
-  priceRange: "R350 – R8,000+",
-  currenciesAccepted: "ZAR",
-  telephone: `+${contacts[0].number}`,
-  email: site.email,
-  contactPoint: contacts.map((c) => ({
-    "@type": "ContactPoint",
-    telephone: `+${c.number}`,
-    email: c.email,
-    contactType: "customer service",
-    name: c.name,
-  })),
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: site.town,
-    addressRegion: site.province,
-    addressCountry: "ZA",
-  },
-  areaServed: { "@type": "Country", name: "South Africa" },
-  founder: [
-    { "@type": "Person", name: "Gcina Mbabe" },
-    { "@type": "Person", name: "Khumbulani Gumede" },
-  ],
-};
 
 const tiers = [
   { name: "Starter", price: "R950", detail: "One page. Customers see what you do and WhatsApp you." },
@@ -56,10 +24,6 @@ const otherServices = [
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
 
       {/* Hero */}
       <section className="relative overflow-hidden pt-32 sm:pt-40">
