@@ -36,11 +36,7 @@ export default function Home() {
         <div className="hairline-grid" aria-hidden="true" />
         <div className="shell relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-8">
           <div>
-            <p className="fade-in inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/60 py-1.5 pr-4 pl-2 text-caption text-muted backdrop-blur">
-              <span className="pulse-dot h-2 w-2 rounded-full bg-gold" />
-              Umzinto, KZN · Taking new projects
-            </p>
-            <h1 className="mt-8 text-hero font-semibold">
+            <h1 className="text-hero font-semibold">
               <RiseText parts={["Websites and apps for small", { em: "South African" }, "businesses."]} base={150} />
             </h1>
             <p className="fade-in mt-8 max-w-lg text-body text-muted sm:text-[1.1875rem]" style={{ "--base": "650ms" } as React.CSSProperties}>
